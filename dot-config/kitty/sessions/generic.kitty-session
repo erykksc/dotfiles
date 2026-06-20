@@ -1,14 +1,14 @@
 new_tab neovim
-launch --hold nvim .
+launch zsh -lic "nvim . ;zsh"
 
 new_tab shell
-launch zsh
+launch zsh -l
 
 new_tab opencode
-launch --hold opencode
+launch zsh -lic "opencode ;zsh"
 
 new_tab lazygit
-launch --hold lazygit
+launch zsh -lic "opencode ;lazygit"
 
 new_tab services
 
