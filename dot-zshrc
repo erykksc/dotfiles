@@ -42,8 +42,7 @@ fzf_to_project() {
 }
 
 # ALIASES
-alias v='nvim'
-alias vc='nvim .'
+alias vim='nvim'
 alias gs='git status'
 alias ls='ls --color=auto -p -h'
 alias f='fzf_to_project'
