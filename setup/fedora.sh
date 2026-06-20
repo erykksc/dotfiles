@@ -34,7 +34,6 @@ sudo dnf install -y \
 	keyd \
 	mise \
 	kernel-headers \
-	v4l2loopback \
 	sqlite \
 	sqlite-devel \
 	zsh \
