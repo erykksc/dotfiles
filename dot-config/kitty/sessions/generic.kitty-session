@@ -8,7 +8,7 @@ new_tab opencode
 launch zsh -lic "opencode ;zsh"
 
 new_tab lazygit
-launch zsh -lic "opencode ;lazygit"
+launch zsh -lic "lazygit ;zsh"
 
 new_tab services
 
