@@ -11,7 +11,6 @@ vim.opt.wrap = false         -- Disable line wrapping
 vim.opt.number = true        -- show absolute number on cursor line
 vim.opt.swapfile = false
 vim.opt.relativenumber = true
-vim.opt.autocomplete = true
 vim.opt.signcolumn = "yes"
 vim.opt.colorcolumn = "+1"
 vim.o.winborder = "single" -- Set the floating window border (like lsp hover)
@@ -32,18 +31,30 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.updatetime = 250 -- Decrease update time
 vim.opt.diffopt = vim.opt.diffopt + { "vertical" }
+vim.o.exrc = true
 
 vim.opt.spelllang = { 'en_us', 'de', 'pl', 'es' }
 
 vim.keymap.set("x", "<leader>p", [["_dP]]) -- greatest remap ever
-vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>")
-vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>")
-vim.keymap.set("n", "<leader>m", "<cmd>make<CR>")
+vim.keymap.set("n", "<C-k>", vim.cmd.cprev)
+vim.keymap.set("n", "<C-j>", vim.cmd.cnext)
+vim.keymap.set("n", "<leader>m", vim.cmd.make)
 
 -- File Explorer
-vim.keymap.set("n", "<leader>er", "<CMD>Rexplore<CR>", { desc = "[E]xplore [P]roject" })
+vim.keymap.set("n", "<leader>er", vim.cmd.Rexplore, { desc = "[E]xplore [P]roject" })
 vim.keymap.set("n", "<leader>ep", "<CMD>Explore .<CR>", { desc = "[E]xplore [P]roject" })
 vim.keymap.set("n", "<leader>ef", vim.cmd.Ex, { desc = "[E]xplore [F]ile" })
+
+-- builtin harpoon
+vim.keymap.set('n', '<leader>a', function()
+	vim.cmd('$argadd %')
+	vim.cmd('argdedup')
+end)
+vim.keymap.set('n', '<C-1>', function() vim.cmd('silent! 1argument') end)
+vim.keymap.set('n', '<C-2>', function() vim.cmd('silent! 2argument') end)
+vim.keymap.set('n', '<C-3>', function() vim.cmd('silent! 3argument') end)
+vim.keymap.set('n', '<C-4>', function() vim.cmd('silent! 4argument') end)
+vim.keymap.set('n', '<C-5>', function() vim.cmd('silent! 5argument') end)
 
 -- Highlight when yanking (copying) text
 vim.api.nvim_create_autocmd('TextYankPost', {
@@ -74,27 +85,33 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- builtin plugins
 vim.cmd.packadd("cfilter")
-vim.cmd.packadd("nvim.undotree")
-vim.keymap.set("n", "<leader>u", "<CMD>Undotree<CR>", { desc = "Open [U]ndo Tree" })
+
+vim.opt.termguicolors = true
+vim.cmd.colorscheme("catppuccin")
+
 
 -- if nvim version doesn't support pack manager (versions < 0.12)
 if vim.pack == nil then
 	return
 end
 
+vim.opt.autocomplete = true
+vim.opt.complete = "o,.,w,b,u,t"
+vim.cmd.packadd("nvim.undotree")
+vim.keymap.set("n", "<leader>u", vim.cmd.Undotree, { desc = "Open [U]ndo Tree" })
 
 -------------------------------- PLUGINS --------------------------------
 vim.pack.add({
-	"https://github.com/Mofiqul/adwaita.nvim",
+	-- "https://github.com/Mofiqul/adwaita.nvim",
 	"https://github.com/brianhuster/live-preview.nvim",
 	"https://github.com/stevearc/oil.nvim",
 	"https://github.com/mrjones2014/smart-splits.nvim",
 	'https://github.com/tpope/vim-sleuth'
 })
 
-vim.opt.termguicolors = true
-vim.cmd.colorscheme("adwaita")
--- vim.cmd.colorscheme("lunaperche")
+-- vim.opt.termguicolors = true
+-- vim.cmd.colorscheme("adwaita")
+-- vim.cmd.colorscheme("sorbet")
 
 require("oil").setup({
 	default_file_explorer = false,
