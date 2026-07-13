@@ -1,3 +1,2 @@
 vim.opt_local.spell = true
-
-vim.opt_local.spelllang = { "en_us", "de", "pl", "es" }
+vim.opt_local.wrap = true

@@ -86,10 +86,6 @@ vim.api.nvim_create_autocmd("FileType", {
 -- builtin plugins
 vim.cmd.packadd("cfilter")
 
-vim.opt.termguicolors = true
-vim.cmd.colorscheme("catppuccin")
-
-
 -- if nvim version doesn't support pack manager (versions < 0.12)
 if vim.pack == nil then
 	return
@@ -102,19 +98,36 @@ vim.keymap.set("n", "<leader>u", vim.cmd.Undotree, { desc = "Open [U]ndo Tree" }
 
 -------------------------------- PLUGINS --------------------------------
 vim.pack.add({
-	-- "https://github.com/Mofiqul/adwaita.nvim",
+	"https://github.com/rebelot/kanagawa.nvim",
+	"https://github.com/edeneast/nightfox.nvim",
+	"https://github.com/shatur/neovim-ayu",
 	"https://github.com/brianhuster/live-preview.nvim",
 	"https://github.com/mrjones2014/smart-splits.nvim",
 	'https://github.com/tpope/vim-sleuth'
 })
 
--- vim.opt.termguicolors = true
--- vim.cmd.colorscheme("adwaita")
--- vim.cmd.colorscheme("sorbet")
+-- require('ayu').setup({
+-- 	mirage = true
+-- })
 
-require("oil").setup({
-	default_file_explorer = false,
+vim.opt.termguicolors = true
+
+vim.api.nvim_create_autocmd('OptionSet', {
+	pattern = 'background',
+	callback = function()
+		if vim.v.option_new == 'dark' then
+			vim.cmd.colorscheme('carbonfox')
+		else
+			vim.cmd.colorscheme('dayfox')
+		end
+	end,
 })
+
+if vim.opt.background:get() == "light" then
+	vim.cmd.colorscheme("dayfox")
+else
+	vim.cmd.colorscheme("carbonfox")
+end
 
 -- plugin: smart-splits.nvim
 local smart_splits = require("smart-splits")
