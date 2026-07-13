@@ -104,7 +104,6 @@ vim.keymap.set("n", "<leader>u", vim.cmd.Undotree, { desc = "Open [U]ndo Tree" }
 vim.pack.add({
 	-- "https://github.com/Mofiqul/adwaita.nvim",
 	"https://github.com/brianhuster/live-preview.nvim",
-	"https://github.com/stevearc/oil.nvim",
 	"https://github.com/mrjones2014/smart-splits.nvim",
 	'https://github.com/tpope/vim-sleuth'
 })
