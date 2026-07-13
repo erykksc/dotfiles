@@ -2,6 +2,6 @@
 
 set -euo pipefail
 
-ssh -t felsen "sudo -S apt-get update && sudo -S apt-get upgrade -y && sudo -S apt autoremove -y"
+ssh -t felsen "sudo -S apt-get update && sudo -S apt-get upgrade -y && sudo -S apt-get autoremove -y"
 
-ssh -t maxmed "sudo -S apt-get update && sudo -S apt-get upgrade -y && sudo -S apt autoremove -y"
+ssh -t maxmed "sudo -S apt-get update && sudo -S apt-get upgrade -y && sudo -S apt-get autoremove -y"
