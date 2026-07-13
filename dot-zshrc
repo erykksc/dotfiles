@@ -44,7 +44,7 @@ fzf_to_project() {
 # ALIASES
 alias vim='nvim'
 alias gs='git status'
-alias ls='ls --color=auto -p -h'
+alias ls='ls --color=auto --hyperlink=auto -p -h'
 alias f='fzf_to_project'
 alias c='wl-copy'
 alias p='wl-paste'
@@ -70,6 +70,7 @@ setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_IGNORE_SPACE
+setopt INTERACTIVECOMMENTS
 
 setopt AUTO_PUSHD
 
