@@ -98,17 +98,11 @@ vim.keymap.set("n", "<leader>u", vim.cmd.Undotree, { desc = "Open [U]ndo Tree" }
 
 -------------------------------- PLUGINS --------------------------------
 vim.pack.add({
-	"https://github.com/rebelot/kanagawa.nvim",
 	"https://github.com/edeneast/nightfox.nvim",
-	"https://github.com/shatur/neovim-ayu",
 	"https://github.com/brianhuster/live-preview.nvim",
 	"https://github.com/mrjones2014/smart-splits.nvim",
 	'https://github.com/tpope/vim-sleuth'
 })
-
--- require('ayu').setup({
--- 	mirage = true
--- })
 
 vim.opt.termguicolors = true
 
