@@ -13,7 +13,4 @@ launch zsh -lic lazygit
 new_tab services
 launch --hold mise run dev-all
 
-new_tab web
-launch kitty --detach --directory /home/erykksc/dev/maxmed mise run web
-
 focus_tab title:neovim
