@@ -41,6 +41,26 @@ fzf_to_project() {
   esac
 }
 
+transcribe() {
+  local filename="$1"
+  local model_path="$HOME/dev/whisper.cpp/models/ggml-${2:-"medium.en"}.bin"
+
+  if [[ -z "$filename" ]]; then
+    echo "Error: The first argument is required."
+    echo "Usage: transcribe <filename> [model, default: medium.en]"
+    return 1
+  fi
+
+  ffmpeg -i "$filename" -f wav -ar 16000 -ac 1 -c:a pcm_s16le - |
+    whisper-cli \
+      -m "$model_path" \
+      -t 6 \
+      --print-progress \
+      -osrt \
+      -f - \
+      --output-file "$(basename "$filename")"
+}
+
 # ALIASES
 alias vim='nvim'
 alias gs='git status'
@@ -118,14 +138,14 @@ if [[ ! -d $ZPLUGINDIR/zsh-syntax-highlighting ]]; then
 fi
 source $ZPLUGINDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 
-# Set Bitwarden as SSH agent
-if [[ "$(uname)" == "Darwin" ]]; then
-  export SSH_AUTH_SOCK="$HOME/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock"
-else
-  # assume linux
-  # export SSH_AUTH_SOCK=$HOME/.bitwarden-ssh-agent.sock
+# Set Bitwarden as SSH agent if exists
+BITWARDEN_MACOS="$HOME/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock"
+BITWARDEN_FLATPAK="$HOME/.var/app/com.bitwarden.desktop/.bitwarden-ssh-agent.sock"
+if [[ -S "$BITWARDEN_FLATPAK" ]]; then
   # use the flatpak version
-  export SSH_AUTH_SOCK=/home/erykksc/.var/app/com.bitwarden.desktop/.bitwarden-ssh-agent.sock
+  export SSH_AUTH_SOCK="$BITWARDEN_FLATPAK"
+elif [[ -S "$BITWARDEN_MACOS" ]]; then
+  export SSH_AUTH_SOCK="$BITWARDEN_MACOS"
 fi
 
 # turn on starship prompt if installed
