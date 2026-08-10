@@ -68,13 +68,32 @@ if command -v distrobox-upgrade >/dev/null 2>&1; then
 	)
 fi
 
-if [ -d "$HOME/dev/neovim" ]; then
-	(
-		cd "$HOME/dev/neovim"
-		git pull
-		sudo make install
-	)
+if command -v rustup >/dev/null 2>&1; then
+	rustup update
 fi
+
+# if [ -d "$HOME/dev/neovim" ]; then
+# 	(
+# 		cd "$HOME/dev/neovim"
+# 		git pull
+# 		# sudo make install
+# 	)
+# fi
+
+# if [ -d "$HOME/dev/MosaicWM" ]; then
+# 	(
+# 		cd "$HOME/dev/MosaicWM"
+# 		git pull
+# 		./scripts/build.sh -i
+# 	)
+# fi
+
+# if [ -d "$HOME/dev/whisper.cpp" ]; then
+# 	(
+# 		cd "$HOME/dev/whisper.cpp"
+# 		git pull
+# 	)
+# fi
 
 if command -v nvim >/dev/null 2>&1; then
 	(
