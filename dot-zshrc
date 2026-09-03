@@ -1,8 +1,5 @@
 #!/usr/bin/env zsh
 
-# Load secrets
-[ -f ~/.secrets ] && source ~/.secrets
-
 fzf_to_project() {
   local -a search_paths fzf_result
   local action selected
@@ -14,14 +11,14 @@ fzf_to_project() {
       echo "$HOME/.local/share/applications"
       find -L "${search_paths[@]}" -mindepth 1 -maxdepth 1 -type d 2>/dev/null
       find "$HOME/Documents" \( -name "node_modules" -o -name ".venv" -o -name ".git" \) -prune -o -type d 2>/dev/null
-    } | fzf \
+    } | sed "s|^$HOME|~|" | fzf \
       --expect=ctrl-e,ctrl-o,ctrl-t \
       --header "Enter: cd/open session | Ctrl-E: Neovim | Ctrl-O: xdg-open" \
       --scheme=path
   )}")
 
   action="$fzf_result[1]"
-  selected="$fzf_result[2]"
+  selected=$(echo "$fzf_result[2]" | sed "s|^~|$HOME|")
 
   if [[ -z $selected ]]; then
     echo "Nothing selected, exiting"
